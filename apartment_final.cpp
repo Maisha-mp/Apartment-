@@ -38,3 +38,24 @@ int roundInt(float v) {
                        : static_cast<int>(v - 0.5f);
 }
 void plotPoint(int x, int y) { glVertex2i(x, y); }
+
+void drawLineDDA(int x1, int y1, int x2, int y2) {
+    int dx    = x2 - x1;
+    int dy    = y2 - y1;
+    int steps = std::max(std::abs(dx), std::abs(dy));
+    if (steps == 0) {
+        glBegin(GL_POINTS); plotPoint(x1, y1); glEnd();
+        return;
+    }
+    float xInc = dx / static_cast<float>(steps);
+    float yInc = dy / static_cast<float>(steps);
+    float x    = static_cast<float>(x1);
+    float y    = static_cast<float>(y1);
+    glBegin(GL_POINTS);
+    for (int i = 0; i <= steps; ++i) {
+        plotPoint(roundInt(x), roundInt(y));
+        x += xInc;
+        y += yInc;
+    }
+    glEnd();
+}
