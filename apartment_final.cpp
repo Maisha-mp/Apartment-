@@ -435,6 +435,25 @@ void update(int value)
     glutTimerFunc(33, update, 0);
 }
 
+
+//Kabir: display() + keyboard()
+
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    drawScene();
+    glutSwapBuffers();
+}
+
+void keyboard(unsigned char key, int, int) {
+    switch (key) {
+        case ' ': animateScene = !animateScene; break;
+        case 27:  std::exit(0);                 break;
+    }
+}
+
+
 //Maisha : init() + main()
 
 void init()
@@ -448,6 +467,7 @@ void init()
     glLoadIdentity();
     glPointSize(2.0f);
 }
+
 
 int main(int argc, char** argv)
 {
