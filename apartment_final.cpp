@@ -278,6 +278,66 @@ void drawBall() {
         drawCircleMidpoint(0, 0, (int)radius);
     glPopMatrix();
 }
+//Maisha: drawClock
+
+void drawClock() {
+    const int cx = 560, cy = 610;
+
+
+    filledCircle((float)cx, (float)cy, 50.0f, 1.0f, 1.0f, 1.0f);
+
+
+    glColor3f(0.42f, 0.35f, 0.28f);
+    glPointSize(2.0f);
+    drawCircleMidpoint(cx, cy, 55);
+    drawCircleMidpoint(cx, cy, 47);
+
+
+    glColor3f(0.35f, 0.28f, 0.22f);
+    glLineWidth(3.0f);
+    glBegin(GL_LINES);
+        glVertex2f(cx,      cy+30); glVertex2f(cx,      cy+42);
+        glVertex2f(cx,      cy-30); glVertex2f(cx,      cy-42);
+        glVertex2f(cx+30,   cy);    glVertex2f(cx+42,   cy);
+        glVertex2f(cx-30,   cy);    glVertex2f(cx-42,   cy);
+    glEnd();
+
+
+    filledCircle((float)cx, (float)cy, 4.5f, 0.55f, 0.45f, 0.36f);
+
+    // hour hand
+    glPushMatrix();
+        glTranslatef((float)cx, (float)cy, 0.0f);
+        glRotatef(hourAngle, 0.0f, 0.0f, 1.0f);
+        glColor3f(0.16f, 0.16f, 0.16f);
+        glLineWidth(5.0f);
+        glBegin(GL_LINES);
+            glVertex2f(0.0f, 0.0f); glVertex2f(0.0f, 22.0f);
+        glEnd();
+    glPopMatrix();
+
+    // minute hand
+    glPushMatrix();
+        glTranslatef((float)cx, (float)cy, 0.0f);
+        glRotatef(minuteAngle, 0.0f, 0.0f, 1.0f);
+        glColor3f(0.20f, 0.20f, 0.20f);
+        glLineWidth(4.0f);
+        glBegin(GL_LINES);
+            glVertex2f(0.0f, 0.0f); glVertex2f(24.0f, 8.0f);
+        glEnd();
+    glPopMatrix();
+
+    // second hand
+    glPushMatrix();
+        glTranslatef((float)cx, (float)cy, 0.0f);
+        glRotatef(secondAngle, 0.0f, 0.0f, 1.0f);
+        glColor3f(0.74f, 0.14f, 0.14f);
+        glLineWidth(2.0f);
+        glBegin(GL_LINES);
+            glVertex2f(0.0f, 0.0f); glVertex2f(0.0f, 34.0f);
+        glEnd();
+    glPopMatrix();
+}
 
 
 //Kabir: drawBookshelf
