@@ -250,6 +250,36 @@ void drawTable() {
     drawLineBresenham(310, 212, 290, 160);
 }
 
+//Maisha: drawBall
+
+void drawBall() {
+    const float ballY  = 110.0f;
+    const float radius = 35.0f;
+
+    glPushMatrix();
+
+        glTranslatef(ballX, ballY, 0.0f);
+
+
+        glRotatef(ballSpin, 0.0f, 0.0f, 1.0f);
+
+        // ball body
+        filledCircle(0, 0, radius, 0.85f, 0.25f, 0.25f);
+
+        // two stripes
+        glColor3f(1.0f, 1.0f, 1.0f);
+        glPointSize(2.5f);
+        drawLineDDA(-(int)radius+5,  8, (int)radius-5,  8);
+        drawLineDDA(-(int)radius+5, -8, (int)radius-5, -8);
+
+        // ball outline
+        glColor3f(0.60f, 0.10f, 0.10f);
+        glPointSize(1.5f);
+        drawCircleMidpoint(0, 0, (int)radius);
+    glPopMatrix();
+}
+
+
 //Kabir: drawBookshelf
 
 void drawBookshelf() {
