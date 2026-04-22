@@ -164,3 +164,20 @@ void drawCloud(float tx, float ty, float scale) {
         filledCircle(60,  2, 14, 1.0f, 1.0f, 1.0f);
     glPopMatrix();
 }
+
+void drawTree(float tx, float ty, float scale);
+
+void drawWindowUnit() {
+
+    filledRect(0,   0, 270, 380, 0.72f, 0.58f, 0.38f);
+    filledRect(10, 12, 260, 368, 0.78f, 0.87f, 0.96f);
+    filledRect(10, 12, 260,  58, 0.52f, 0.66f, 0.36f);
+    drawTree(178, 118, 1.15f);
+    drawCloud(38 + cloudOffset, 300, 1.2f);
+    glColor3f(0.55f, 0.42f, 0.26f);
+    glPointSize(2.0f);
+    drawLineDDA(135,  12, 135, 368);
+    drawLineDDA( 10, 180, 260, 180);
+    glColor3f(0.52f, 0.39f, 0.24f);
+    lineRectDDA(0, 0, 270, 380);
+}
