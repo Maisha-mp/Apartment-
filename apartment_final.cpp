@@ -193,6 +193,45 @@ void drawDoor() {
     drawCircleMidpoint(780, 370, 9);
 }
 
+//Kabir: drawSofa
+
+void drawSofaArm() {
+    filledRect(0, 0, 38, 160, 0.60f, 0.50f, 0.46f);
+    glColor3f(0.41f, 0.31f, 0.24f);
+    glPointSize(2.0f);
+    lineRectBresenham(0, 0, 38, 160);
+}
+
+void drawSofa() {
+    filledRect(180, 175, 720, 265, 0.65f, 0.55f, 0.49f);
+    filledRect(180, 260, 720, 330, 0.68f, 0.60f, 0.54f);
+
+    // left arm
+    glPushMatrix();
+        glTranslatef(160.0f, 175.0f, 0.0f);
+        drawSofaArm();
+    glPopMatrix();
+
+    // right armrest
+    glPushMatrix();
+        glTranslatef(740.0f, 175.0f, 0.0f);
+        glScalef(-1.0f, 1.0f, 1.0f);
+        drawSofaArm();
+    glPopMatrix();
+
+    // cushions
+    filledRect(190, 265, 355, 318, 0.73f, 0.68f, 0.62f);
+    filledRect(365, 265, 515, 318, 0.73f, 0.68f, 0.62f);
+    filledRect(525, 265, 675, 318, 0.73f, 0.68f, 0.62f);
+
+    glColor3f(0.44f, 0.33f, 0.26f);
+    glPointSize(2.0f);
+    lineRectBresenham(180, 175, 720, 330);
+
+    filledRect(188, 158, 205, 175, 0.33f, 0.22f, 0.16f);
+    filledRect(695, 158, 712, 175, 0.33f, 0.22f, 0.16f);
+}
+
 // Maisha: basic shapes
 
 void filledRect(float x1, float y1, float x2, float y2, float r, float g, float b)
