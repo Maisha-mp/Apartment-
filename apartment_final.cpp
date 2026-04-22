@@ -295,7 +295,28 @@ void drawBookshelf() {
     lineRectBresenham(0, 0, 160, 245);
 }
 
+//Kabir:  drawScene
 
+void drawScene() {
+    filledRect(0, 220, WIDTH, HEIGHT, 0.96f, 0.95f, 0.93f);
+    drawFloor();
+
+    glPushMatrix();
+        glTranslatef(45.0f, 280.0f, 0.0f);
+        drawWindowUnit();
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(340.0f, 280.0f, 0.0f);
+        drawBookshelf();
+    glPopMatrix();
+
+    drawClock();
+    drawDoor();
+    drawSofa();
+    drawTable();
+    drawBall();
+}
 
 // Maisha: basic shapes
 
