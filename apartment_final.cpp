@@ -71,6 +71,52 @@ void drawLineDDA(int x1, int y1, int x2, int y2)
     glEnd();
 }
 
+// Maisha: basic shapes
+
+void filledRect(float x1, float y1, float x2, float y2, float r, float g, float b)
+{
+    glColor3f(r, g, b);
+    glBegin(GL_QUADS);
+    glVertex2f(x1,y1);
+    glVertex2f(x2,y1);
+    glVertex2f(x2,y2);
+    glVertex2f(x1,y2);
+    glEnd();
+}
+
+void filledPolygon4(float x1, float y1, float x2, float y2,float x3, float y3, float x4, float y4, float r,  float g,  float b)
+{
+    glColor3f(r, g, b);
+    glBegin(GL_POLYGON);
+    glVertex2f(x1,y1);
+    glVertex2f(x2,y2);
+    glVertex2f(x3,y3);
+    glVertex2f(x4,y4);
+    glEnd();
+}
+
+void filledCircle(float cx, float cy, float radius,float r, float g, float b)
+{
+    glColor3f(r, g, b);
+    glBegin(GL_TRIANGLE_FAN);
+    glVertex2f(cx, cy);
+    for (int i = 0; i <= 120; ++i)
+    {
+        float ang = 2.0f * PI * i / 120.0f;
+        glVertex2f(cx + radius * std::cos(ang),
+                   cy + radius * std::sin(ang));
+    }
+    glEnd();
+}
+
+void lineRectDDA(int x1, int y1, int x2, int y2)
+{
+    drawLineDDA(x1,y1,x2,y1);
+    drawLineDDA(x2,y1,x2,y2);
+    drawLineDDA(x2,y2,x1,y2);
+    drawLineDDA(x1,y2,x1,y1);
+}
+
 void plotCirclePoints(int xc, int yc, int x, int y)
 {
     plotPoint(xc+x, yc+y);
@@ -101,6 +147,56 @@ void drawCircleMidpoint(int xc, int yc, int r)
         ++x;
     }
     glEnd();
+}
+
+// Maisha: drawFloor
+
+void drawFloor()
+{
+    filledRect(0, 0, WIDTH, 220, 0.89f, 0.83f, 0.71f);
+
+    glColor3f(0.82f, 0.76f, 0.64f);
+    glPointSize(1.0f);
+    drawLineDDA(0, 145, WIDTH, 145);
+    drawLineDDA(0,  75, WIDTH,  75);
+    drawLineDDA(0,  55, WIDTH,  55);
+}
+
+
+
+
+// Maisha: drawCloud
+
+void drawCloud(float tx, float ty, float scale)
+{
+    glPushMatrix();
+    glTranslatef(tx, ty, 0.0f);
+    glScalef(scale, scale, 1.0f);
+    filledCircle( 0,  0, 22, 1.0f, 1.0f, 1.0f);
+    filledCircle(22, 10, 18, 1.0f, 1.0f, 1.0f);
+    filledCircle(42,  6, 20, 1.0f, 1.0f, 1.0f);
+    filledCircle(60,  2, 14, 1.0f, 1.0f, 1.0f);
+    glPopMatrix();
+}
+
+void drawTree(float tx, float ty, float scale);
+
+//Maisha: drawWindowUnit
+
+void drawWindowUnit()
+{
+
+    filledRect(0,   0, 270, 380, 0.72f, 0.58f, 0.38f);
+    filledRect(10, 12, 260, 368, 0.78f, 0.87f, 0.96f);
+    filledRect(10, 12, 260,  58, 0.52f, 0.66f, 0.36f);
+    drawTree(178, 118, 1.15f);
+    drawCloud(38 + cloudOffset, 300, 1.2f);
+    glColor3f(0.55f, 0.42f, 0.26f);
+    glPointSize(2.0f);
+    drawLineDDA(135,  12, 135, 368);
+    drawLineDDA( 10, 180, 260, 180);
+    glColor3f(0.52f, 0.39f, 0.24f);
+    lineRectDDA(0, 0, 270, 380);
 }
 
 //Kabir: Bresenham Line
@@ -408,98 +504,7 @@ void drawScene() {
     drawBall();
 }
 
-// Maisha: basic shapes
 
-void filledRect(float x1, float y1, float x2, float y2, float r, float g, float b)
-{
-    glColor3f(r, g, b);
-    glBegin(GL_QUADS);
-    glVertex2f(x1,y1);
-    glVertex2f(x2,y1);
-    glVertex2f(x2,y2);
-    glVertex2f(x1,y2);
-    glEnd();
-}
-
-void filledPolygon4(float x1, float y1, float x2, float y2,float x3, float y3, float x4, float y4, float r,  float g,  float b)
-{
-    glColor3f(r, g, b);
-    glBegin(GL_POLYGON);
-    glVertex2f(x1,y1);
-    glVertex2f(x2,y2);
-    glVertex2f(x3,y3);
-    glVertex2f(x4,y4);
-    glEnd();
-}
-
-void filledCircle(float cx, float cy, float radius,float r, float g, float b)
-{
-    glColor3f(r, g, b);
-    glBegin(GL_TRIANGLE_FAN);
-    glVertex2f(cx, cy);
-    for (int i = 0; i <= 120; ++i)
-    {
-        float ang = 2.0f * PI * i / 120.0f;
-        glVertex2f(cx + radius * std::cos(ang),
-                   cy + radius * std::sin(ang));
-    }
-    glEnd();
-}
-
-void lineRectDDA(int x1, int y1, int x2, int y2)
-{
-    drawLineDDA(x1,y1,x2,y1);
-    drawLineDDA(x2,y1,x2,y2);
-    drawLineDDA(x2,y2,x1,y2);
-    drawLineDDA(x1,y2,x1,y1);
-}
-
-// Maisha: drawFloor
-
-void drawFloor()
-{
-    filledRect(0, 0, WIDTH, 220, 0.89f, 0.83f, 0.71f);
-
-    glColor3f(0.82f, 0.76f, 0.64f);
-    glPointSize(1.0f);
-    drawLineDDA(0, 145, WIDTH, 145);
-    drawLineDDA(0,  75, WIDTH,  75);
-    drawLineDDA(0,  55, WIDTH,  55);
-}
-
-// Maisha: drawCloud
-
-void drawCloud(float tx, float ty, float scale)
-{
-    glPushMatrix();
-    glTranslatef(tx, ty, 0.0f);
-    glScalef(scale, scale, 1.0f);
-    filledCircle( 0,  0, 22, 1.0f, 1.0f, 1.0f);
-    filledCircle(22, 10, 18, 1.0f, 1.0f, 1.0f);
-    filledCircle(42,  6, 20, 1.0f, 1.0f, 1.0f);
-    filledCircle(60,  2, 14, 1.0f, 1.0f, 1.0f);
-    glPopMatrix();
-}
-
-void drawTree(float tx, float ty, float scale);
-
-//Maisha: drawWindowUnit
-
-void drawWindowUnit()
-{
-
-    filledRect(0,   0, 270, 380, 0.72f, 0.58f, 0.38f);
-    filledRect(10, 12, 260, 368, 0.78f, 0.87f, 0.96f);
-    filledRect(10, 12, 260,  58, 0.52f, 0.66f, 0.36f);
-    drawTree(178, 118, 1.15f);
-    drawCloud(38 + cloudOffset, 300, 1.2f);
-    glColor3f(0.55f, 0.42f, 0.26f);
-    glPointSize(2.0f);
-    drawLineDDA(135,  12, 135, 368);
-    drawLineDDA( 10, 180, 260, 180);
-    glColor3f(0.52f, 0.39f, 0.24f);
-    lineRectDDA(0, 0, 270, 380);
-}
 
 //Maisha: update() animation timer (~30 fps)
 
