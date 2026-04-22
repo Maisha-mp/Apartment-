@@ -152,6 +152,28 @@ void applyShearX(float shx) {
     glMultMatrixf(m);
 }
 
+
+//Kabir: drawTree
+
+void drawTree(float tx, float ty, float scale) {
+    glPushMatrix();
+        glTranslatef(tx, ty, 0.0f);
+        glScalef(scale, scale, 1.0f);
+        glRotatef(treeAngle, 0, 0, 1);
+        filledRect(-10, -55, 10, 0, 0.52f, 0.34f, 0.15f);
+        filledCircle(  0, 48, 45, 0.50f, 0.68f, 0.30f);
+        filledCircle(-30, 18, 30, 0.35f, 0.56f, 0.21f);
+        filledCircle( 30, 18, 30, 0.35f, 0.56f, 0.21f);
+
+
+        glColor3f(0.28f, 0.46f, 0.14f);
+        glPointSize(2.0f);
+        drawCircleMidpoint(  0, 48, 45);
+        drawCircleMidpoint(-30, 18, 30);
+        drawCircleMidpoint( 30, 18, 30);
+    glPopMatrix();
+}
+
 // Maisha: basic shapes
 
 void filledRect(float x1, float y1, float x2, float y2, float r, float g, float b)
