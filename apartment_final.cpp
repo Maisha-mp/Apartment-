@@ -105,21 +105,39 @@ void drawCircleMidpoint(int xc, int yc, int r)
 
 //Kabir: Bresenham Line
 
-void drawLineBresenham(int x1, int y1, int x2, int y2) {
+void drawLineBresenham(int x1, int y1, int x2, int y2)
+{
     int dx  = std::abs(x2 - x1);
     int dy  = std::abs(y2 - y1);
     int sx  = (x1 < x2) ? 1 : -1;
     int sy  = (y1 < y2) ? 1 : -1;
     int err = dx - dy;
     glBegin(GL_POINTS);
-    while (true) {
+    while (true)
+    {
         plotPoint(x1, y1);
         if (x1 == x2 && y1 == y2) break;
         int e2 = 2 * err;
-        if (e2 > -dy) { err -= dy; x1 += sx; }
-        if (e2 <  dx) { err += dx; y1 += sy; }
+        if (e2 > -dy)
+        {
+            err -= dy;
+            x1 += sx;
+        }
+        if (e2 <  dx)
+        {
+            err += dx;
+            y1 += sy;
+        }
     }
     glEnd();
+}
+
+void lineRectBresenham(int x1, int y1, int x2, int y2)
+{
+    drawLineBresenham(x1,y1,x2,y1);
+    drawLineBresenham(x2,y1,x2,y2);
+    drawLineBresenham(x2,y2,x1,y2);
+    drawLineBresenham(x1,y2,x1,y1);
 }
 
 // Maisha: basic shapes
@@ -170,7 +188,8 @@ void lineRectDDA(int x1, int y1, int x2, int y2)
 
 // Maisha: drawFloor
 
-void drawFloor() {
+void drawFloor()
+{
     filledRect(0, 0, WIDTH, 220, 0.89f, 0.83f, 0.71f);
 
     glColor3f(0.82f, 0.76f, 0.64f);
@@ -182,14 +201,15 @@ void drawFloor() {
 
 // Maisha: drawCloud
 
-void drawCloud(float tx, float ty, float scale) {
+void drawCloud(float tx, float ty, float scale)
+{
     glPushMatrix();
-        glTranslatef(tx, ty, 0.0f);
-        glScalef(scale, scale, 1.0f);
-        filledCircle( 0,  0, 22, 1.0f, 1.0f, 1.0f);
-        filledCircle(22, 10, 18, 1.0f, 1.0f, 1.0f);
-        filledCircle(42,  6, 20, 1.0f, 1.0f, 1.0f);
-        filledCircle(60,  2, 14, 1.0f, 1.0f, 1.0f);
+    glTranslatef(tx, ty, 0.0f);
+    glScalef(scale, scale, 1.0f);
+    filledCircle( 0,  0, 22, 1.0f, 1.0f, 1.0f);
+    filledCircle(22, 10, 18, 1.0f, 1.0f, 1.0f);
+    filledCircle(42,  6, 20, 1.0f, 1.0f, 1.0f);
+    filledCircle(60,  2, 14, 1.0f, 1.0f, 1.0f);
     glPopMatrix();
 }
 
@@ -197,7 +217,8 @@ void drawTree(float tx, float ty, float scale);
 
 //Maisha: drawWindowUnit
 
-void drawWindowUnit() {
+void drawWindowUnit()
+{
 
     filledRect(0,   0, 270, 380, 0.72f, 0.58f, 0.38f);
     filledRect(10, 12, 260, 368, 0.78f, 0.87f, 0.96f);
@@ -214,9 +235,11 @@ void drawWindowUnit() {
 
 //Maisha: update() animation timer (~30 fps)
 
-void update(int value) {
+void update(int value)
+{
     (void)value;
-    if (animateScene) {
+    if (animateScene)
+    {
 
 
         cloudOffset += 0.35f;
@@ -236,7 +259,8 @@ void update(int value) {
 
 //Maisha : init() + main()
 
-void init() {
+void init()
+{
     glClearColor(0.97f, 0.96f, 0.94f, 1.0f);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -247,7 +271,8 @@ void init() {
     glPointSize(2.0f);
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(WIDTH, HEIGHT);
