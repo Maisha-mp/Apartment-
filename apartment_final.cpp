@@ -174,6 +174,25 @@ void drawTree(float tx, float ty, float scale) {
     glPopMatrix();
 }
 
+
+//Kabir: drawDoor
+
+void drawDoor() {
+    filledRect(740, 220, 930, 585, 0.58f, 0.45f, 0.28f);
+    filledRect(760, 238, 905, 560, 0.62f, 0.49f, 0.32f);
+
+    // door borders
+    glColor3f(0.44f, 0.31f, 0.18f);
+    glPointSize(2.0f);
+    lineRectBresenham(740, 220, 930, 585);
+    lineRectBresenham(760, 238, 905, 560);
+
+    // door handle
+    filledCircle(780, 370, 9.0f, 0.88f, 0.83f, 0.52f);
+    glColor3f(0.70f, 0.62f, 0.30f);
+    drawCircleMidpoint(780, 370, 9);
+}
+
 // Maisha: basic shapes
 
 void filledRect(float x1, float y1, float x2, float y2, float r, float g, float b)
