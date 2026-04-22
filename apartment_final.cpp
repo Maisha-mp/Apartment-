@@ -140,6 +140,18 @@ void lineRectBresenham(int x1, int y1, int x2, int y2)
     drawLineBresenham(x1,y2,x1,y1);
 }
 
+//Kabir: Bresenham Line Shear transformation helper
+
+void applyShearX(float shx) {
+    GLfloat m[16] = {
+        1.0f, 0.0f, 0.0f, 0.0f,
+        shx,  1.0f, 0.0f, 0.0f,
+        0.0f, 0.0f, 1.0f, 0.0f,
+        0.0f, 0.0f, 0.0f, 1.0f
+    };
+    glMultMatrixf(m);
+}
+
 // Maisha: basic shapes
 
 void filledRect(float x1, float y1, float x2, float y2, float r, float g, float b)
