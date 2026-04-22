@@ -232,6 +232,24 @@ void drawSofa() {
     filledRect(695, 158, 712, 175, 0.33f, 0.22f, 0.16f);
 }
 
+
+//Kabir: drawTable
+
+void drawTable() {
+    filledPolygon4(290, 160, 590, 160, 570, 212, 310, 212,
+                   0.75f, 0.44f, 0.15f);
+    filledRect(320, 105, 338, 160, 0.62f, 0.37f, 0.11f);
+    filledRect(560, 105, 578, 160, 0.62f, 0.37f, 0.11f);
+
+
+    glColor3f(0.50f, 0.28f, 0.10f);
+    glPointSize(2.0f);
+    drawLineBresenham(290, 160, 590, 160);
+    drawLineBresenham(590, 160, 570, 212);
+    drawLineBresenham(570, 212, 310, 212);
+    drawLineBresenham(310, 212, 290, 160);
+}
+
 // Maisha: basic shapes
 
 void filledRect(float x1, float y1, float x2, float y2, float r, float g, float b)
