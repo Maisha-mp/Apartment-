@@ -143,3 +143,12 @@ void lineRectDDA(int x1, int y1, int x2, int y2)
     drawLineDDA(x1,y2,x1,y1);
 }
 
+void drawFloor() {
+    filledRect(0, 0, WIDTH, 220, 0.89f, 0.83f, 0.71f);
+
+    glColor3f(0.82f, 0.76f, 0.64f);
+    glPointSize(1.0f);
+    drawLineDDA(0, 145, WIDTH, 145);
+    drawLineDDA(0,  75, WIDTH,  75);
+    drawLineDDA(0,  55, WIDTH,  55);
+}
