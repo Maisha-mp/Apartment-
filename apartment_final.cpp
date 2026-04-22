@@ -250,6 +250,53 @@ void drawTable() {
     drawLineBresenham(310, 212, 290, 160);
 }
 
+//Kabir: drawBookshelf
+
+void drawBookshelf() {
+    filledRect(0,   0, 160, 245, 0.64f, 0.47f, 0.24f);
+    filledRect(8,  10, 152, 235, 0.70f, 0.54f, 0.30f);
+    filledRect(8, 160, 152, 168, 0.53f, 0.38f, 0.19f);
+    filledRect(8,  80, 152,  88, 0.53f, 0.38f, 0.19f);
+
+    // top row books
+    filledRect( 18, 178,  38, 225, 0.84f, 0.29f, 0.32f);
+    filledRect( 44, 178,  62, 216, 0.24f, 0.42f, 0.80f);
+    filledRect( 68, 178,  88, 220, 0.45f, 0.70f, 0.26f);
+
+    // tilted book
+    glPushMatrix();
+        glTranslatef(96.0f, 178.0f, 0.0f);
+        applyShearX(0.20f);
+        filledRect(0, 0, 18, 44, 0.42f, 0.80f, 0.25f);
+    glPopMatrix();
+
+    filledRect(116, 178, 136, 227, 0.90f, 0.78f, 0.20f);
+    filledRect(138, 178, 152, 220, 0.22f, 0.50f, 0.83f);
+
+    // middle row books
+    filledRect( 18,  95,  38, 145, 0.84f, 0.29f, 0.32f);
+    filledRect( 46,  95,  62, 143, 0.23f, 0.47f, 0.83f);
+    filledRect( 70,  95,  88, 145, 0.50f, 0.69f, 0.35f);
+    filledRect( 96,  95, 118, 137, 0.90f, 0.53f, 0.19f);
+    filledRect(124,  95, 144, 140, 0.55f, 0.55f, 0.49f);
+    filledRect(148,  95, 168, 144, 0.54f, 0.38f, 0.82f);
+
+    // bottom row books
+    filledRect( 18,  15,  38,  65, 0.50f, 0.36f, 0.82f);
+    filledRect( 46,  15,  66,  65, 0.86f, 0.34f, 0.29f);
+    filledRect( 74,  15,  92,  65, 0.22f, 0.50f, 0.83f);
+    filledRect(100,  15, 118,  65, 0.52f, 0.66f, 0.30f);
+    filledRect(124,  15, 142,  65, 0.84f, 0.34f, 0.39f);
+    filledRect(148,  15, 166,  65, 0.83f, 0.66f, 0.15f);
+
+    // shelf border
+    glColor3f(0.35f, 0.23f, 0.12f);
+    glPointSize(2.0f);
+    lineRectBresenham(0, 0, 160, 245);
+}
+
+
+
 // Maisha: basic shapes
 
 void filledRect(float x1, float y1, float x2, float y2, float r, float g, float b)
