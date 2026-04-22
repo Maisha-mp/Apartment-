@@ -18,6 +18,8 @@
 #include <algorithm>
 #include <cstdlib>
 
+//Maisha: DDA
+
 
 const int   WIDTH  = 1000;
 const int   HEIGHT = 700;
@@ -80,6 +82,9 @@ void plotCirclePoints(int xc, int yc, int x, int y)
     plotPoint(xc+y, yc-x);
     plotPoint(xc-y, yc-x);
 }
+
+// Maisha: Midpoint circle
+
 void drawCircleMidpoint(int xc, int yc, int r)
 {
     int x = 0, y = r, d = 1 - r;
@@ -98,6 +103,7 @@ void drawCircleMidpoint(int xc, int yc, int r)
     glEnd();
 }
 
+// Maisha: basic shapes
 
 void filledRect(float x1, float y1, float x2, float y2, float r, float g, float b)
 {
@@ -143,6 +149,8 @@ void lineRectDDA(int x1, int y1, int x2, int y2)
     drawLineDDA(x1,y2,x1,y1);
 }
 
+// Maisha: drawFloor
+
 void drawFloor() {
     filledRect(0, 0, WIDTH, 220, 0.89f, 0.83f, 0.71f);
 
@@ -153,6 +161,7 @@ void drawFloor() {
     drawLineDDA(0,  55, WIDTH,  55);
 }
 
+// Maisha: drawCloud
 
 void drawCloud(float tx, float ty, float scale) {
     glPushMatrix();
@@ -167,6 +176,8 @@ void drawCloud(float tx, float ty, float scale) {
 
 void drawTree(float tx, float ty, float scale);
 
+//Maisha: drawWindowUnit
+
 void drawWindowUnit() {
 
     filledRect(0,   0, 270, 380, 0.72f, 0.58f, 0.38f);
@@ -180,4 +191,53 @@ void drawWindowUnit() {
     drawLineDDA( 10, 180, 260, 180);
     glColor3f(0.52f, 0.39f, 0.24f);
     lineRectDDA(0, 0, 270, 380);
+}
+
+//Maisha: update() animation timer (~30 fps)
+
+void update(int value) {
+    (void)value;
+    if (animateScene) {
+
+
+        cloudOffset += 0.35f;
+        if (cloudOffset > 78.0f) cloudOffset = -18.0f;
+        secondAngle -= 0.2f;
+        minuteAngle -= 0.2f / 60.0f;
+        hourAngle   -= 0.2f / 720.0f;
+        treeAngle = 4.0f * std::sin(cloudOffset * 0.06f);
+        ballX    += 1.2f * ballDir;
+        ballSpin -= 3.5f * ballDir;
+        if (ballX > 590.0f) ballDir = -1.0f;
+        if (ballX < 230.0f) ballDir =  1.0f;
+    }
+    glutPostRedisplay();
+    glutTimerFunc(33, update, 0);
+}
+
+//Maisha : init() + main()
+
+void init() {
+    glClearColor(0.97f, 0.96f, 0.94f, 1.0f);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0.0, static_cast<GLdouble>(WIDTH),
+               0.0, static_cast<GLdouble>(HEIGHT));
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glPointSize(2.0f);
+}
+
+int main(int argc, char** argv) {
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    glutInitWindowSize(WIDTH, HEIGHT);
+    glutInitWindowPosition(60, 40);
+    glutCreateWindow("Peaceful Apartment - Computer Graphics Project");
+    init();
+    glutDisplayFunc(display);
+    glutKeyboardFunc(keyboard);
+    glutTimerFunc(0, update, 0);
+    glutMainLoop();
+    return 0;
 }
