@@ -152,3 +152,15 @@ void drawFloor() {
     drawLineDDA(0,  75, WIDTH,  75);
     drawLineDDA(0,  55, WIDTH,  55);
 }
+
+
+void drawCloud(float tx, float ty, float scale) {
+    glPushMatrix();
+        glTranslatef(tx, ty, 0.0f);
+        glScalef(scale, scale, 1.0f);
+        filledCircle( 0,  0, 22, 1.0f, 1.0f, 1.0f);
+        filledCircle(22, 10, 18, 1.0f, 1.0f, 1.0f);
+        filledCircle(42,  6, 20, 1.0f, 1.0f, 1.0f);
+        filledCircle(60,  2, 14, 1.0f, 1.0f, 1.0f);
+    glPopMatrix();
+}
