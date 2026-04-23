@@ -1,18 +1,5 @@
-#ifdef _WIN32
-#include <windows.h>
-#endif
 
-#if defined(__has_include)
-#if __has_include(<GL/freeglut.h>)
-#include <GL/freeglut.h>
-#elif __has_include(<GL/glut.h>)
 #include <GL/glut.h>
-#else
-#error FreeGLUT/GLUT header not found.
-#endif
-#else
-#include <GL/glut.h>
-#endif
 
 #include <cmath>
 #include <algorithm>
